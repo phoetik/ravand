@@ -1,0 +1,29 @@
+{
+    "name": "ravandsoft/ravand",
+	"type": "wordpress-plugin",
+    "description": "An interactive user panel for wordpress",
+    "license": "MIT",
+    "require": {
+        "php": "^7.4",
+        "phoetik/pluguin": "^0.1.0",
+        "typisttech/imposter-plugin": "^0.6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ravand\\": "plugin/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "typisttech/imposter-plugin": true
+        }
+    },
+    "extra": {
+        "imposter": {
+            "namespace": "Ravand\\Vendor"
+        }
+    }
+}

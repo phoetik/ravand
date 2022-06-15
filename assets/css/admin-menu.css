@@ -1,0 +1,103 @@
+@font-face {
+    font-family: 'Yekan Bakh Hairline';
+    src: url('../fonts/yekan/YekanBakh-Hairline.eot');
+    src: url('../fonts/yekan/YekanBakh-Hairline.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Hairline.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Hairline.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Hairline.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('../fonts/yekan/YekanBakh-Thin.eot');
+    src: url('../fonts/yekan/YekanBakh-Thin.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Thin.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Thin.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('../fonts/yekan/YekanBakh-Light.eot');
+    src: url('../fonts/yekan/YekanBakh-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Light.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Light.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('../fonts/yekan/YekanBakh-Medium.eot');
+    src: url('../fonts/yekan/YekanBakh-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Medium.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Medium.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('../fonts/yekan/YekanBakh-Regular.eot');
+    src: url('../fonts/yekan/YekanBakh-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Regular.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Regular.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('../fonts/yekan/YekanBakh-Bold.eot');
+    src: url('../fonts/yekan/YekanBakh-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Bold.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Bold.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('../fonts/yekan/YekanBakh-Heavy.eot');
+    src: url('../fonts/yekan/YekanBakh-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Heavy.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Heavy.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh Fat';
+    src: url('../fonts/yekan/YekanBakh-Fat.eot');
+    src: url('../fonts/yekan/YekanBakh-Fat.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/yekan/YekanBakh-Fat.woff2') format('woff2'),
+        url('../fonts/yekan/YekanBakh-Fat.woff') format('woff'),
+        url('../fonts/yekan/YekanBakh-Fat.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+.wrap *{
+    font-family: 'Yekan Bakh' !important;
+}
+
+.rtl{
+    direction: rtl;
+}
