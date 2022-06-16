@@ -1,13 +1,16 @@
 <?php
 
-use Ravand\Core\Contracts\Request;
+use Ravand\Core as Plugin;
+use Ravand\Hooks;
 
 Ravand::init();
 
 Ravand::singleton(
-    Request::class,
+    Ravand\Vendor\Pluguin\Contracts\Request::class,
     Ravand\Core\Request::class
 );
+
+Ravand::registerHooks(Hooks::class);
 
 if (defined('REST_REQUEST')) {
 
@@ -32,6 +35,25 @@ if (defined('REST_REQUEST')) {
 $request = Ravand::make("request");
 
 $request->handle();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 use Ravand\Vendor\Illuminate\Container\Container;
 

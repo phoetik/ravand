@@ -6,7 +6,7 @@ class Hooks
 {
     public function install()
     {
-
+        
     }
 
     public function activate()

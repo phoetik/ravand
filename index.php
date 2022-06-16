@@ -32,17 +32,12 @@ defined('ABSPATH') or die('Not Authorized!');
 |
 |
  */
-file_put_contents(ABSPATH."/ravand_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.txt","");
 
-function ravand_uninstalll()
-{
-    file_put_contents(ABSPATH."/ravand_uninstalllddddddddddddddddddddddddddddddddddddddddddddddd.txt","");
+if (!defined('RAVAND')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+    require_once __DIR__ . "/bootstrap/plugin.php";
 }
-register_uninstall_hook( __FILE__,  'ravand_uninstalll');
 
-// register_uninstall_hook( __FILE__,  function(){
-//     do_action("test_uninstall");
-// });
 
 // if (!defined('RAVAND')) {
 //     require_once __DIR__ . '/../vendor/autoload.php';
@@ -75,6 +70,20 @@ init
 wp_loaded
 shutdown
 
+
+Main actions during an uninstallation request
+
+check for WP_UNINSTALL_PLUGIN and is_plugin_active( 'wordpress-seo/wp-seo.php' )
+
+plugins_loaded
+init
+wp_loaded
+admin_init
+pre_uninstall_plugin
+uninstall_rava.php
+delete_plugin
+deleted_plugin
+shutdown
 
 
 */
