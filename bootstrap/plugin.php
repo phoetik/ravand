@@ -2,6 +2,7 @@
 
 use Ravand\Core as Plugin;
 use Ravand\Hooks;
+use Ravand\Vendor\Pluguin\Helper;
 
 Ravand::init();
 
@@ -11,6 +12,9 @@ Ravand::singleton(
 );
 
 Ravand::registerHooks(Hooks::class);
+Ravand::addActions();
+
+Ravand::container()->make();
 
 if (defined('REST_REQUEST')) {
 
