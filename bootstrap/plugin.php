@@ -1,8 +1,45 @@
 <?php
 
-use Ravand\Core as Plugin;
-use Ravand\Hooks;
-use Ravand\Vendor\Pluguin\Helper;
+/*
+|--------------------------------------------------------------------------
+| Create The Pluguin instance
+|--------------------------------------------------------------------------
+|
+| The first thing we will do is create a new Pluguin plugin instance
+|
+ */
+
+return (function () {
+
+    $plugin = new Pluguin\Foundation\Plugin(
+        dirname(__DIR__)
+    );
+
+    $plugin->singleton(
+        Pluguin\Contracts\Wordpress\Admin\Kernel::class,
+        $plugin->getClass()
+    );
+
+    $plugin->singleton(
+        Pluguin\Contracts\Wordpress\Ajax\Kernel::class,
+        $plugin->getClass()
+    );
+
+    $plugin->singleton(
+        Pluguin\Contracts\Wordpress\Rest\Kernel::class,
+        $plugin->getClass()
+    );
+
+    $plugin->singleton(
+        Pluguin\Contracts\Wordpress\Kernel::class,
+        $plugin->getClass()
+    );
+
+    return $plugin;
+
+})();
+
+
 
 Ravand::init();
 
@@ -33,31 +70,12 @@ if (defined('REST_REQUEST')) {
     Ravand::extend(Request::class, function ($service, $app) {
         return new Ravand\Handlers\Base($service);
     });
-    
+
 }
 
 $request = Ravand::make("request");
 
 $request->handle();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 use Ravand\Vendor\Illuminate\Container\Container;
 
