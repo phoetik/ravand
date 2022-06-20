@@ -35,7 +35,9 @@ defined('ABSPATH') or die('Not Authorized!');
 
 if (!defined('RAVAND')) {
     require_once __DIR__ . '/../vendor/autoload.php';
-    require_once __DIR__ . "/bootstrap/plugin.php";
+    $ravand = require_once __DIR__ . "/bootstrap/plugin.php";
+
+    if
 }
 
 
