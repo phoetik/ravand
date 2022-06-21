@@ -17,7 +17,7 @@ return (function () {
 
     $plugin->singleton(
         Pluguin\Contracts\Wordpress\Admin\Kernel::class,
-        $plugin->getClass()
+        Ravand\
     );
 
     $plugin->singleton(
