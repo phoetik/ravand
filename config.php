@@ -1,5 +1,10 @@
 <?php
 
 return [
-    "debug" => false
+    "plugin" => [
+        "providers" => [
+
+        ],
+    ],
+    "debug" => false,
 ];
