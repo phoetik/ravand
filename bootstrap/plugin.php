@@ -1,39 +1,25 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Create The Pluguin instance
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Pluguin plugin instance
-|
- */
-
 return (function () {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Create The Pluguin instance
+    |--------------------------------------------------------------------------
+    |
+    | The first thing we will do is create a new Pluguin plugin instance
+    |
+    */
 
     $plugin = new Pluguin\Foundation\Plugin(
         dirname(__DIR__)
     );
 
     $plugin->singleton(
-        Pluguin\Contracts\Wordpress\Admin\Kernel::class,
-        Ravand\
-    );
-
-    $plugin->singleton(
-        Pluguin\Contracts\Wordpress\Ajax\Kernel::class,
-        $plugin->getClass()
-    );
-
-    $plugin->singleton(
-        Pluguin\Contracts\Wordpress\Rest\Kernel::class,
-        $plugin->getClass()
-    );
-
-    $plugin->singleton(
         Pluguin\Contracts\Wordpress\Kernel::class,
-        $plugin->getClass()
+        Ravand\Wordpress\Kernel::class
     );
+
 
     return $plugin;
 
