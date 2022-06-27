@@ -5,21 +5,19 @@
  *
  * @package     Ravand Admin Panel
  * @author      sina-radmanesh
- * @copyright   2022 RavandSoft
+ * @copyright   2022 Webbax
  * @license     GPL-2.0+
  *
  * @wordpress-plugin
- * Plugin Name: Ravand Admin Panel
- * Plugin URI: https://ravandsoft.com/admin-panel
- * Description: ...
- * Version:     0.0.1
+ * Plugin Name: Pluguin
+ * Plugin URI: https://webbax.dev/pluguin
+ * Description: Advanced mvc plugins using composer and eloquent
+ * Version:     0.1.0
  * Requires PHP: 7.4
  * Author:      Sina Radmanesh
- * Author URI:  http://webbax.ir
+ * Author URI:  http://webbax.dev
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: ravand
- * Domain Path: /resources/lang
  */
 
 defined('ABSPATH') or die('Not Authorized!');
@@ -33,19 +31,29 @@ defined('ABSPATH') or die('Not Authorized!');
 |
  */
 
-if (!defined('RAVAND')) {
-    require_once __DIR__ . '/../vendor/autoload.php';
-    $ravand = require_once __DIR__ . "/bootstrap/plugin.php";
-
-    if
+if (defined('RAVAND')) {
+    return;
 }
 
+define("RAVAND", true);
 
-// if (!defined('RAVAND')) {
-//     require_once __DIR__ . '/../vendor/autoload.php';
+add_action('admin_init', function () {
+    if (is_admin() && current_user_can('activate_plugins') && !defined("PLUGUIN")) {
+        add_action('admin_notices', function () {
+            echo '<div class="error"><p>Ravand requires Pluguin to be installed and active.</p></div>';
+        });
+    }
+});
 
-//     require_once __DIR__ . "/bootstrap/plugin.php";
-// }
+add_action("pluguin", function ($pluguin) {
+
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    $ravand = require_once __DIR__ . "/bootstrap/plugin.php";
+
+
+});
+
 
 /*
 
@@ -72,7 +80,6 @@ init
 wp_loaded
 shutdown
 
-
 Main actions during an uninstallation request
 
 check for WP_UNINSTALL_PLUGIN and is_plugin_active( 'wordpress-seo/wp-seo.php' )
@@ -87,5 +94,4 @@ delete_plugin
 deleted_plugin
 shutdown
 
-
-*/
+ */
