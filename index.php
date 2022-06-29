@@ -7,7 +7,7 @@
  * @author      sina-radmanesh
  * @copyright   2022 Webbax
  * @license     GPL-2.0+
- *
+ * 
  * @wordpress-plugin
  * Plugin Name: Pluguin
  * Plugin URI: https://webbax.dev/pluguin

@@ -4,10 +4,15 @@ return [
     "plugin" => [
         "providers" => [
             "eager" => [
+                \Pluguin\Database\DatabaseServiceProvider::class,
                 Ravand\Providers\ActionServiceProvider::class,
             ],
 
             "deferred" => [
+                \Pluguin\Database\MigrationServiceProvider::class => [
+
+                ],
+
                 Ravand\Providers\AdminServiceProvider::class => [
 
                 ],
@@ -18,7 +23,7 @@ return [
 
                 ],
                 Ravand\Providers\RestServiceProvider::class => [
-
+                    
                 ],
                 Ravand\Providers\ShortCodeServiceProvider::class => [
 
@@ -28,4 +33,9 @@ return [
 
         "debug" => false,
     ],
+    "database" => [
+        "migrations" => [
+            \Ravand\Database\Migrations\CreateTestTable::class
+        ]
+    ]
 ];
