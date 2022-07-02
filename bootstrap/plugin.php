@@ -1,29 +1,10 @@
 <?php
 
-return (function () {
+return function ($pluginFile) {
 
-    /*
-    |--------------------------------------------------------------------------
-    | Create The Pluguin instance
-    |--------------------------------------------------------------------------
-    |
-    | The first thing we will do is create a new Pluguin plugin instance
-    |
-    */
+    
 
-    $plugin = new Pluguin\Foundation\Plugin(
-        dirname(__DIR__)
-    );
-
-    $plugin->singleton(
-        Pluguin\Contracts\Wordpress\Kernel::class,
-        Ravand\Wordpress\Kernel::class
-    );
-
-
-    return $plugin;
-
-})();
+};
 
 
 

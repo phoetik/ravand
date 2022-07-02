@@ -37,6 +37,32 @@ if (defined('RAVAND')) {
 
 define("RAVAND", true);
 
+add_action("pluguin", function ($pluguin) {
+
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    /*
+    |--------------------------------------------------------------------------
+    | Create The Pluguin instance
+    |--------------------------------------------------------------------------
+    |
+    | The first thing we will do is create a new Pluguin plugin instance
+    |
+    */
+
+    $plugin = new Pluguin\Foundation\Plugin(
+        __FILE__,
+        $pluguin
+    );
+
+    // $plugin->singleton(
+    //     Pluguin\Contracts\Wordpress\Kernel::class,
+    //     Ravand\Wordpress\Kernel::class
+    // );
+
+    $plugin->init();
+});
+
 add_action('admin_init', function () {
     if (is_admin() && current_user_can('activate_plugins') && !defined("PLUGUIN")) {
         add_action('admin_notices', function () {
@@ -44,16 +70,6 @@ add_action('admin_init', function () {
         });
     }
 });
-
-add_action("pluguin", function ($pluguin) {
-
-    require_once __DIR__ . '/vendor/autoload.php';
-
-    $ravand = require_once __DIR__ . "/bootstrap/plugin.php";
-
-
-});
-
 
 /*
 

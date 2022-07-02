@@ -1,7 +1,13 @@
 <?php
 
 return [
+
     "plugin" => [
+
+        "slug" => "ravand",
+
+        "version" => "1.4.1",
+        
         "providers" => [
             "eager" => [
                 \Pluguin\Database\DatabaseServiceProvider::class,
