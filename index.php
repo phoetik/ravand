@@ -7,7 +7,7 @@
  * @author      sina-radmanesh
  * @copyright   2022 Webbax
  * @license     GPL-2.0+
- * 
+ *
  * @wordpress-plugin
  * Plugin Name: Pluguin
  * Plugin URI: https://webbax.dev/pluguin
@@ -43,16 +43,15 @@ add_action("pluguin", function ($pluguin) {
 
     /*
     |--------------------------------------------------------------------------
-    | Create The Pluguin instance
+    | Create The plugin
     |--------------------------------------------------------------------------
     |
-    | The first thing we will do is create a new Pluguin plugin instance
+    | we will create a new plugin instance and register it 
     |
-    */
+     */
 
-    $plugin = new Pluguin\Foundation\Plugin(
-        __FILE__,
-        $pluguin
+    $pluguin->register(
+        new Ravand\Plugin(__FILE__)
     );
 
     // $plugin->singleton(
@@ -60,7 +59,7 @@ add_action("pluguin", function ($pluguin) {
     //     Ravand\Wordpress\Kernel::class
     // );
 
-    $plugin->init();
+    
 });
 
 add_action('admin_init', function () {

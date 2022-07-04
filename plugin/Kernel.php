@@ -2,11 +2,11 @@
 
 namespace Ravand;
 
-use Pluguin\Foundation\Plugin;
+use Pluguin\Foundation\Plugin as BasePlugin;
 use Pluguin\Database\Database;
 use Ravand\Database\Migrations;
 
-class Kernel extends Plugin
+class Plugin extends BasePlugin
 {
     public function install()
     {
