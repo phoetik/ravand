@@ -1,12 +1,8 @@
 <?php
 
-return function ($pluginFile) {
+return (function ($pluginFile) {
 
-    
-
-};
-
-
+});
 
 Ravand::init();
 

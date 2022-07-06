@@ -39,27 +39,28 @@ define("RAVAND", true);
 
 add_action("pluguin", function ($pluguin) {
 
-    require_once __DIR__ . '/vendor/autoload.php';
+    require __DIR__ . '/vendor/autoload.php';
 
     /*
     |--------------------------------------------------------------------------
     | Create The plugin
     |--------------------------------------------------------------------------
     |
-    | we will create a new plugin instance and register it 
+    | we will create a new plugin instance and register it
     |
      */
 
-    $pluguin->register(
-        new Ravand\Plugin(__FILE__)
-    );
+    $bootstrapper = require_once __DIR__ . "/bootstrap/plugin.php";
+
+    $plugin = $bootstrapper(__FILE__);
+
+    $pluguin->register($plugin);
 
     // $plugin->singleton(
     //     Pluguin\Contracts\Wordpress\Kernel::class,
     //     Ravand\Wordpress\Kernel::class
     // );
 
-    
 });
 
 add_action('admin_init', function () {

@@ -10,7 +10,7 @@ class Plugin extends BasePlugin
 {
     public function install()
     {
-        $this->migrate();
+        $this["migrator"]();
     }
 
     public function activate()
