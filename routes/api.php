@@ -12,15 +12,15 @@ use Ravand\Controllers\ControlPanelController;
 
 $apiRouter->get("/user/(?P<id>\d+)");
 
-register_rest_route( 
-    'myplugin/v1', 
-    '/author/(?P<id>\d+)', array(
-    'methods' => 'GET',
-    'callback' => function,
-    'permission_callback' => '__return_true',
-));
+// register_rest_route( 
+//     'myplugin/v1', 
+//     '/author/(?P<id>\d+)', array(
+//     'methods' => 'GET',
+//     'callback' => function,
+//     'permission_callback' => '__return_true',
+// ));
 
 
-ApiRouter::get()
+// ApiRouter::get()
 
-Router::fallback();
+// Router::fallback();

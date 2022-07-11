@@ -8,19 +8,24 @@ use Ravand\Database\Migrations;
 
 class Plugin extends BasePlugin
 {
+    public function init()
+    {
+
+    }
+    
     public function install()
     {
-        $this["migrator"]();
+        $this->migrate();
     }
 
     public function activate()
     {
-        //
+        $this->cacheConfiguration();
     }
 
     public function deactivate()
     {
-        //
+        $this->clearConfigurationCache();
     }
 
     public function uninstall()
@@ -30,11 +35,11 @@ class Plugin extends BasePlugin
 
     public function upgrade($from, $to)
     {
-        Migrator::run(Migrations::class);
+        // 
     }
 
     public function downgrade($from, $to)
     {
-        Migrator::rollback(Migrations::class);
+        // 
     }
 }
