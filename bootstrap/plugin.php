@@ -1,46 +1,13 @@
 <?php
 
 return (function ($pluginFile) {
+    $plugin = new Ravand\Plugin(
+        $pluginFile
+    );
 
+    return $plugin;
 });
 
-Ravand::init();
-
-Ravand::singleton(
-    Ravand\Vendor\Pluguin\Contracts\Request::class,
-    Ravand\Core\Request::class
-);
-
-Ravand::registerHooks(Hooks::class);
-Ravand::addActions();
-
-Ravand::container()->make();
-
-if (defined('REST_REQUEST')) {
-
-    Ravand::extend(Request::class, function ($service, $app) {
-        return new Ravand\Handlers\Api($service);
-    });
-
-} elseif (is_admin()) {
-
-    Ravand::extend(Request::class, function ($service, $app) {
-        return new Ravand\Handlers\Admin($service);
-    });
-
-} else {
-
-    Ravand::extend(Request::class, function ($service, $app) {
-        return new Ravand\Handlers\Base($service);
-    });
-
-}
-
-$request = Ravand::make("request");
-
-$request->handle();
-
-use Ravand\Vendor\Illuminate\Container\Container;
 
 final class Ravandi
 {
@@ -84,7 +51,6 @@ final class Ravandi
 
     public static function container()
     {
-
     }
 
     private static function setInstance(Ravand $instance): void
@@ -125,17 +91,14 @@ final class Ravandi
 
     public function activate()
     {
-
     }
 
     public function deactivate()
     {
-
     }
 
     public function uninstall()
     {
-
     }
 
     private $addons = [];
@@ -143,9 +106,7 @@ final class Ravandi
     public static function registerAddOn($addonOrPath)
     {
         if (is_object($addonOrPath)) {
-
         } elseif (file_exists($classOrPath)) {
-
         } else {
             throw new InvalidAddonClassOrDirectory;
         }
@@ -164,9 +125,7 @@ final class Ravandi
 
     private function registerApiActions()
     {
-
         add_action('rest_api_init', function () {
-
             require_once __DIR__ . "/api.php";
 
             RavandApi::init();
@@ -213,15 +172,12 @@ final class Ravandi
         global $submenu;
 
         if (isset($submenu[$menu_slug])) {
-
             $submenu[$menu_slug][0][0] = $new_label;
-
         }
     }
 
     public function addDashboardMenuItems()
     {
-
         $dashboard_submenu_list = $this->getDashboardSubmenuList();
 
         foreach ($dashboard_submenu_list as $item) {
@@ -244,7 +200,6 @@ final class Ravandi
 
     public function getControllerCallback()
     {
-        return fn() => "";
+        return fn () => "";
     }
-
 };

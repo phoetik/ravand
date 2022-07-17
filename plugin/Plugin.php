@@ -15,22 +15,22 @@ class Plugin extends BasePlugin
     
     public function install()
     {
-        $this->migrate();
+        // $this->migrate();
     }
 
     public function activate()
     {
-        $this->cacheConfiguration();
+        // $this->cacheConfiguration();
     }
 
     public function deactivate()
     {
-        $this->clearConfigurationCache();
+        // $this->clearConfigurationCache();
     }
 
     public function uninstall()
     {
-        $this->resetMigrations();
+        // $this->resetMigrations();
     }
 
     public function upgrade($from, $to)

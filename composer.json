@@ -4,8 +4,7 @@
     "description": "An interactive user panel for wordpress",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
-        "phoetik/pluguin": "^0.1.0",
+        "php": ">=7.4",
         "typisttech/imposter-plugin": "^0.6.2"
     },
     "autoload": {
