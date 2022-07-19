@@ -25,6 +25,7 @@ class Plugin extends BasePlugin
 
     public function deactivate()
     {
+        
         // $this->clearConfigurationCache();
     }
 

@@ -22,6 +22,8 @@
 
 defined('ABSPATH') or die('Not Authorized!');
 
+defined('RAVAND', true);
+
 /*
 |--------------------------------------------------------------------------
 |
@@ -31,14 +33,9 @@ defined('ABSPATH') or die('Not Authorized!');
 |
  */
 
-if (defined('RAVAND')) {
-    return;
-}
-
-define("RAVAND", true);
+require_once __DIR__ . "/bootstrap/hooks.php";
 
 add_action("pluguin", function ($pluguin) {
-
     require_once __DIR__ . '/vendor/autoload.php';
 
     /*
@@ -50,32 +47,19 @@ add_action("pluguin", function ($pluguin) {
     |
      */
 
-    $bootstrapper = require_once __DIR__ . "/bootstrap/plugin.php";
-
-    $plugin = $bootstrapper(__FILE__);
-
+    $plugin = (require_once __DIR__ . "/bootstrap/plugin.php")(__FILE__);
+    
     $pluguin->register($plugin);
 
     // $plugin->singleton(
     //     Pluguin\Contracts\Wordpress\Kernel::class,
     //     Ravand\Wordpress\Kernel::class
     // );
-
 });
 
-/*
-|--------------------------------------------------------------------------
-| Check Pluguin
-|--------------------------------------------------------------------------
-|
-| check that pluguin is installed and activated
-|
- */
-
-$checker = require_once __DIR__."/bootstrap/check.php";
-
-$checker(__FILE__);
-
+register_activation_hook(__FILE__, __NAMESPACE__ . "\activate");
+register_deactivation_hook(__FILE__, __NAMESPACE__ . "\deactivate");
+register_uninstall_hook(__FILE__, __NAMESPACE__ . "\uninstall");
 /*
 
 Main actions during rest api request:

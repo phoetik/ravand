@@ -9,7 +9,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Ravand\\": "plugin/"
+            "Ravand\\": "plugin/",
+            "Ravand\\Bootstrap\\Plugin": "bootstrap/plugin.php"
         }
     },
     "config": {
