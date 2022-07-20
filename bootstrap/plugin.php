@@ -1,132 +1,99 @@
 <?php
 
+namespace Ravand;
 
+use Pluguin\Pluguin;
 
-
-
-/**
- * 
- * 
- * 
- * 
- * 
- */
-
-namespace Ravand\Bootstrap;
-
-class Plugin 
+final class Bootstrapper
 {
-    private static $initialized = false;
+    private static $pluginFile;
 
-    private static $file;
-
-    public static function register($file)
+    public static function run($pluginFile)
     {
-        if(self::isInitialized()) {
-            return;
+        self::setPluginFile($pluginFile);
+
+        if (get_option("pluguin") !== false) {
+            self::register();
+        } else {
+            self::rejectHooks();
         }
-
-        self::$file = $file;
-
-        $class = self::class;
-
-        \add_action("pluguin","$class::init");
-        \register_activation_hook($file, "$class::activate");
-        \register_deactivation_hook($file, "$class::deactivate");
-        \register_uninstall_hook($file, "$class::uninstall");
     }
 
-    private static function isInitialized()
+    public static function setPluginFile($pluginFile)
     {
-        return self::$initialized;
-    } 
+        self::$pluginFile = $pluginFile;
+    }
 
-    public static function init($pluguin)
+    public static function getPluginFile()
     {
-        self::$initialized = true;
+        return self::$pluginFile;
+    }
 
-        $plugin = new Ravand\Plugin(
-            self::$file
+    public static function register()
+    {
+        if (class_exists(Pluguin::class)) {
+            Pluguin::register(
+                self::bootstrap()
+            );
+        } else {
+            add_action("pluguin", function ($pluguin) {
+                $pluguin::register(
+                    self::bootstrap()
+                );
+            });
+        }
+    }
+
+    private static function rejectHooks()
+    {
+        register_activation_hook(self::class."::reject_activate");
+        register_deactivation_hook(self::class."::reject_deactivate");
+        register_uninstall_hook(self::class."::reject_uninstall");
+    }
+
+    private static function bootstrap()
+    {
+        $plugin = new Plugin(
+            self::getPluginFile()
         );
 
-        $pluguin->register($plugin);
+        return $plugin;
     }
 
-}
+    public static function activate()
+    {
+        self::reject("activate");
+    }
 
-return function ($pluginFile) {
+    public static function deactivate()
+    {
+        self::reject("deactivate");
+    }
 
-    new class($pluginFile) {
+    public static function uninstall()
+    {
+        self::reject("uninstall");
+    }
 
-        private $plugin;
-    
-        private $basename;
-    
-        public function __construct($pluginFile)
-        {
-            $this->plugin = $pluginFile;
-            $this->basename = plugin_basename($this->plugin);
-    
-            add_action("plugins_loaded", [$this, "pluginsLoadedHook"]);
-
-            register_activation_hook($this->plugin, [$this,"activationHook"]);
-        }
-    
-        public function pluginsLoadedHook()
-        {
-            if (!defined("PLUGUIN")) {
-                add_action('admin_init', [$this, 'adminHook']);
-                register_activation_hook($this->plugin, [$this,"activationHook"]);
-            }
-        }
-    
-        public function adminHook()
-        {
-            if ($this->deactivateIfPluginIsActive()) {
-                add_action('admin_notices', [$this, 'pluguinNotice' ]);
-                $this->unsetActivationParameter();
-            }
-        }
-    
-        public function pluguinNotice()
-        {
-            ?>
-                <div class="notice notice-error is-dismissible">
-                    <strong>
-                        <p><?php echo $this->pluguinRequiredMessage(); ?></p>
-                    </strong>
-                </div>
-            <?php
-        }
+    private static function reject($action)
+    {
         
-        private function unsetActivationParameter()
-        {
-            if (isset($_GET['activate'])) {
-                unset($_GET['activate']);
+    }
+
+    public static function __callStatic($name, $args)
+    {
+        $words = explode("_", $name, 2);
+
+        if($words[0] == "reject" && count($words) == 2) {
+            if(in_array($words[1], [
+                "activate",
+                "deactivate",
+                "uninstall"
+            ])) {
+                $action = $words[1];
+                $adminPluginsUrl = \admin_url('plugins.php');
+                wp_die("In order to $action this plugin you need to install and activate Pluguin. <br><br><a href='$adminPluginsUrl'>Return back to plugins.</a>");
             }
         }
-    
-        private function pluguinRequiredMessage()
-        {
-            echo 'This Plugin requires <a href="https://wordpress.org/plugins/pluguin/">Pluguin</a> to be able to get activated, deactivated or uninstalled.';
-        }
-    
-        public function activationHook()
-        {
-            $this->deactivateIfPluginIsActive();
-        }
-    
-    
-        private function deactivateIfPluginIsActive()
-        {
-            if (is_plugin_active($this->basename)) {
-                deactivate_plugins($this->basename, $silent = true);
-                
-                return true;
-            }
-            
-            return false;
-        }
-    
-    };
-};
+    }
+}

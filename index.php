@@ -20,9 +20,11 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
+use Ravand\Bootstrapper;
+
 defined('ABSPATH') or die('Not Authorized!');
 
-defined('RAVAND', true);
+define('RAVAND', true);
 
 /*
 |--------------------------------------------------------------------------
@@ -33,33 +35,12 @@ defined('RAVAND', true);
 |
  */
 
-require_once __DIR__ . "/bootstrap/hooks.php";
+require_once __DIR__ . '/vendor/autoload.php';
 
-add_action("pluguin", function ($pluguin) {
-    require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . "/bootstrap/plugin.php";
 
-    /*
-    |--------------------------------------------------------------------------
-    | Create The plugin
-    |--------------------------------------------------------------------------
-    |
-    | we will create a new plugin instance and register it
-    |
-     */
+Bootstrapper::run( __FILE__ );
 
-    $plugin = (require_once __DIR__ . "/bootstrap/plugin.php")(__FILE__);
-    
-    $pluguin->register($plugin);
-
-    // $plugin->singleton(
-    //     Pluguin\Contracts\Wordpress\Kernel::class,
-    //     Ravand\Wordpress\Kernel::class
-    // );
-});
-
-register_activation_hook(__FILE__, __NAMESPACE__ . "\activate");
-register_deactivation_hook(__FILE__, __NAMESPACE__ . "\deactivate");
-register_uninstall_hook(__FILE__, __NAMESPACE__ . "\uninstall");
 /*
 
 Main actions during rest api request:
