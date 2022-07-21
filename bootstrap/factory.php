@@ -6,17 +6,29 @@ class Factory
 {
     private static $plugin;
 
-    public function __invoke($file)
+    private $pluginFile;
+
+    public function __construct($pluginFile)
+    {
+        $this->pluginFile = $pluginFile;
+    }
+
+    public function __invoke()
     {
         if (isset(self::$plugin)) {
             return self::$plugin;
         }
 
-        return self::$plugin = $this->bootstrap($file);
+        return [self::$plugin = $this->bootstrap($this->pluginFile)];
     }
 
-    public function bootstrap($file)
+    public function getPluginFile()
     {
-        return new Ravand\Plugin($file);
+        return $this->pluginFile;
+    }
+
+    public function bootstrap($pluginFile)
+    {
+        return new \Ravand\Plugin($pluginFile);
     }
 }

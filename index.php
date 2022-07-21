@@ -20,8 +20,6 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-namespace Ravand;
-
 defined('ABSPATH') or die('Not Authorized!');
 
 define('RAVAND', true);
@@ -41,8 +39,8 @@ require_once __DIR__ . "/bootstrap/hooks.php";
 
 require_once __DIR__ . "/bootstrap/factory.php";
 
-Hooks::setup(
-    new Factory(__FILE__)
+Ravand\Bootstrap\Hooks::setup(
+    new Ravand\Bootstrap\Factory(__FILE__)
 );
 
 /*

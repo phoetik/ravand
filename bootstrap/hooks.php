@@ -38,21 +38,23 @@ class Hooks
     {
         if ($allow) {
             $prefix = "register";
-            self::deferredPluguinCall("register", self::getFactory());
+            self::deferredPluguinCall("register", self::getPluginFactory());
         } else {
             $prefix = "reject";
         }
 
-        register_activation_hook(self::class."::$prefix-activate");
-        register_deactivation_hook(self::class."::$prefix-deactivate");
-        register_uninstall_hook(self::class."::$prefix-uninstall");
+        $file = self::getPluginFactory()->getPluginFile();
+
+        register_activation_hook($file,self::class."::$prefix-activate");
+        register_deactivation_hook($file,self::class."::$prefix-deactivate");
+        register_uninstall_hook($file,self::class."::$prefix-uninstall");
     }
 
     public static function __callStatic($name, $args)
     {
         $words = explode("-", $name, 2);
 
-        if ($count($words) !== 2) {
+        if (count($words) !== 2) {
             return;
         }
 
@@ -81,7 +83,7 @@ class Hooks
     
     private static function deferredPluguinCall($method, callable $argumentProvider)
     {
-        $args = (array) $argumentProvider();
+        $args = (array) ($argumentProvider());
 
         if (class_exists(Pluguin::class)) {
             Pluguin::getInstance()->{$method}(...$args);
