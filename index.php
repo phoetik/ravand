@@ -20,7 +20,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-use Ravand\Bootstrapper;
+namespace Ravand;
 
 defined('ABSPATH') or die('Not Authorized!');
 
@@ -37,9 +37,13 @@ define('RAVAND', true);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-require_once __DIR__ . "/bootstrap/plugin.php";
+require_once __DIR__ . "/bootstrap/hooks.php";
 
-Bootstrapper::run( __FILE__ );
+require_once __DIR__ . "/bootstrap/factory.php";
+
+Hooks::setup(
+    new Factory(__FILE__)
+);
 
 /*
 
