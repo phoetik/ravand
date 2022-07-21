@@ -1,7 +1,5 @@
 <?php
 
 return [
-    "migrations" => [
-        \Ravand\Database\Migrations\CreateTestTable::class,
-    ],
+    "migrations" => "ravand_migrations"
 ];

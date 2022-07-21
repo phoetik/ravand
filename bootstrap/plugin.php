@@ -60,20 +60,20 @@ final class Bootstrapper
         return $plugin;
     }
 
-    public static function activate()
-    {
-        self::reject("activate");
-    }
+    // public static function activate()
+    // {
+    //     self::reject("activate");
+    // }
 
-    public static function deactivate()
-    {
-        self::reject("deactivate");
-    }
+    // public static function deactivate()
+    // {
+    //     self::reject("deactivate");
+    // }
 
-    public static function uninstall()
-    {
-        self::reject("uninstall");
-    }
+    // public static function uninstall()
+    // {
+    //     self::reject("uninstall");
+    // }
 
     private static function reject($action)
     {

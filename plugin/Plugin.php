@@ -10,7 +10,28 @@ class Plugin extends BasePlugin
 {
     public function init()
     {
+        add_filter('theme_page_templates', function ($templates) {
+            $templates[
+               $this->panelTemplatePath()
+            ] = "Ravand Admin Template";
 
+            // var_dump($templates);
+        
+            return $templates;
+        });
+
+
+        add_filter( 'template_include', function ($template) {
+            if (is_page()) {
+                $meta = get_post_meta(get_the_ID());
+        
+                if (!empty($meta['_wp_page_template'][0]) && $meta['_wp_page_template'][0] != $template) {
+                    $template = $meta['_wp_page_template'][0] = $this->panelTemplatePath();
+                }
+            }
+        
+            return $template;
+        }, 99 );
     }
     
     public function install()
@@ -21,6 +42,8 @@ class Plugin extends BasePlugin
     public function activate()
     {
         // $this->cacheConfiguration();
+        $this->createMigrationRepository();
+        $this->migrate();
     }
 
     public function deactivate()
@@ -31,16 +54,50 @@ class Plugin extends BasePlugin
 
     public function uninstall()
     {
-        // $this->resetMigrations();
+        $this->resetMigrations();
+        $this->deleteMigrationRepository();
     }
 
     public function upgrade($from, $to)
     {
-        // 
+        //
     }
 
     public function downgrade($from, $to)
     {
-        // 
+        //
+    }
+
+    private function panelTemplatePath()
+    {
+        return $this->resourcePath("templates/panel.php");
+    }
+
+    private function migrate()
+    {
+        $this["migrator"]->run([
+            $this->databasePath().'/migrations/'
+        ]);
+    }
+
+    private function createMigrationRepository()
+    {
+        if (!$this["migration.repository"]->repositoryExists()) {
+            $this["migration.repository"]->createRepository();
+        }
+    }
+
+    private function resetMigrations()
+    {
+        $this["migrator"]->reset([
+            $this->databasePath().'/migrations/'
+        ]);
+    }
+
+    private function deleteMigrationRepository()
+    {
+        if ($this["migration.repository"]->repositoryExists()) {
+            $this["migration.repository"]->deleteRepository();
+        }
     }
 }
