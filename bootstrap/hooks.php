@@ -82,15 +82,21 @@ class Hooks
 
     
     private static function deferredPluguinCall($method, callable $argumentProvider)
-    {
-        $args = (array) ($argumentProvider());
-
+    {  
         if (class_exists(Pluguin::class)) {
+            $args = self::getArguments($argumentProvider);
             Pluguin::getInstance()->{$method}(...$args);
         } else {
             add_action("pluguin", function ($pluguin) use ($method, $static, $args) {
+                $args = self::getArguments($argumentProvider);
                 $pluguin->{$method}(...$args);
             });
         }
+    }
+
+    private static function getArguments(callable $argumentProvider)
+    {
+        $args = $argumentProvider();
+        return is_array($args) ? $args : [$args];
     }
 }
