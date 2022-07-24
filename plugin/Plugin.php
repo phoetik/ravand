@@ -49,13 +49,13 @@ class Plugin extends BasePlugin
     public function deactivate()
     {
         
+        $this->resetMigrations();
+        $this->deleteMigrationRepository();
         // $this->clearConfigurationCache();
     }
 
     public function uninstall()
     {
-        $this->resetMigrations();
-        $this->deleteMigrationRepository();
     }
 
     public function upgrade($from, $to)
