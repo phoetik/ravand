@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'ravandsoft/ravand',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '245f3fbe30f06b4c26c038c9ce48cf2402789122',
+        'type' => 'wordpress-plugin',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'ravandsoft/ravand' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '245f3fbe30f06b4c26c038c9ce48cf2402789122',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'typisttech/imposter' => array(
+            'pretty_version' => '0.6.1',
+            'version' => '0.6.1.0',
+            'reference' => 'f52b1a2289d2ea9c660cf9595085d0b11469af83',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../typisttech/imposter',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'typisttech/imposter-plugin' => array(
+            'pretty_version' => '0.6.2',
+            'version' => '0.6.2.0',
+            'reference' => '15fa3c90aca3b79497f438b9e02a6176498de53c',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../typisttech/imposter-plugin',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);
