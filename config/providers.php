@@ -1,17 +1,19 @@
 <?php
 
+namespace Ravand\Providers;
+
 return [
     "eager" => [
+        PluginServiceProvider::class
     ],
 
     "deferred" => [
-        \Pluguin\Database\MigrationServiceProvider::class => [
-            "migrator",
-            "migration.repository"
-        ]
+        
     ],
 
     "when" => [
-        // Provider => Events
+        AdminServiceProvider::class => [
+            "wp-admin-request"
+        ]
     ]
 ];

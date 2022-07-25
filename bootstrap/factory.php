@@ -19,7 +19,9 @@ class Factory
             return self::$plugin;
         }
 
-        return [self::$plugin = $this->bootstrap($this->pluginFile)];
+        return [
+            self::$plugin = $this->bootstrap($this->pluginFile)
+        ];
     }
 
     public function getPluginFile()

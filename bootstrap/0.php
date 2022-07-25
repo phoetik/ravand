@@ -1,13 +1,5 @@
 <?php
 
-return (function ($pluginFile) {
-    $plugin = new Ravand\Plugin(
-        $pluginFile
-    );
-
-    return $plugin;
-});
-
 
 final class Ravandi
 {

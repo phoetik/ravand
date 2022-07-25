@@ -5,9 +5,6 @@ namespace Ravand\Bootstrap;
 use Pluguin\Pluguin;
 use Ravand\Bootstrap\Factory as PluginFactory;
 
-/**
- *
- */
 class Hooks
 {
     private static $factory;
@@ -16,7 +13,9 @@ class Hooks
     {
         self::setPluginFactory($factory);
 
-        self::register(self::pluguinExists());
+        self::register(
+            self::pluguinExists()
+        );
     }
 
     public static function setPluginFactory(PluginFactory $factory)
@@ -31,23 +30,25 @@ class Hooks
 
     private static function pluguinExists()
     {
-        return get_option("pluguin") !== false;
+        return \get_option("pluguin") !== false;
     }
 
     public static function register($allow = true)
     {
+        $prefix = "reject";
+
         if ($allow) {
             $prefix = "register";
             self::deferredPluguinCall("register", self::getPluginFactory());
-        } else {
-            $prefix = "reject";
         }
 
         $file = self::getPluginFactory()->getPluginFile();
 
-        register_activation_hook($file,self::class."::$prefix-activate");
-        register_deactivation_hook($file,self::class."::$prefix-deactivate");
-        register_uninstall_hook($file,self::class."::$prefix-uninstall");
+        $class = self::class;
+
+        register_activation_hook($file, "$class::$prefix-activate");
+        register_deactivation_hook($file, "$class::$prefix-deactivate");
+        register_uninstall_hook($file, "$class::$prefix-uninstall");
     }
 
     public static function __callStatic($name, $args)
@@ -82,10 +83,11 @@ class Hooks
 
     
     private static function deferredPluguinCall($method, callable $argumentProvider)
-    {  
+    {
         if (class_exists(Pluguin::class)) {
             $args = self::getArguments($argumentProvider);
-            Pluguin::getInstance()->{$method}(...$args);
+            Pluguin::getInstance()
+                ->{$method}(...$args);
         } else {
             add_action("pluguin", function ($pluguin) use ($method, $static, $args) {
                 $args = self::getArguments($argumentProvider);

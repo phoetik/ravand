@@ -3,9 +3,8 @@
 namespace Ravand\Providers;
 
 use Pluguin\Support\ServiceProvider;
-use Ravand\Services\AdminService;
 
-class AdminServiceProvider extends ServiceProvider
+class LanguageServiceProvider extends ServiceProvider
 {
     /**
      * Register any plugin services.
@@ -14,9 +13,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->plugin->singleton('admin', function($plugin){
-            return new AdminService($plugin);
-        });
+        //
     }
 
     /**
@@ -26,6 +23,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->plugin["admin"]->registerActions();
+        //
     }
 }
