@@ -51,45 +51,54 @@ class AdminService
 
     public function renderAppearanceSettings()
     {
-        register_setting( 'ravand-appearance', 'ravand-appearance-settings' );
+        $pageSlug = "ravand-appearance";
+        $optionName = 'ravand-appearance-settings';
+        $logoTitle = "";
+        $options = get_option($optionName, ["color" => "#ffffff"]);
 
-        // Register a new section in the "wporg" page.
+        $appearanceSection = [
+            "id" => "ravand-appearance-section",
+            "title" => "Appearance Section",
+            "fields" => [
+                "color" => [
+                    "id" => 'ravand-appearance-color',
+                    "title" => "Color"
+                ]
+            ]
+        ];
+
+        $this->enqueueColorPicker();
+
+        register_setting( 
+            $pageSlug, 
+            $optionName 
+        );
+
         add_settings_section(
-            'ravand-title',
-            __( 'Panel Title', 'ravand' ), 
-            function ( $args ) {
-
-                $id =  esc_attr( $args['id'] );
-                $text = esc_html_e( "Something I don't know.", 'ravand' );
-
-                echo "<p id='$id'>$text</p>";
-            },
-            'ravand-appearance'
+            $appearanceSection["id"],
+            $appearanceSection["title"], 
+            function ( $args ) { },
+            $pageSlug
         );
 
         add_settings_field(
-            'ravand-panel-title',
-            __( 'Toitle', 'ravand' ),
-            function( $args ) {
-                // Get the value of the setting we've registered with register_setting()
-                $options = get_option( 'ravand-appearance-settings' );
-                ?>
-                <input type="text" value="<?php $options; ?>" name="<?php echo $args['label_for']?>">
-                <p class="description">
-                    <?php esc_html_e( 'Blah blah blah.', 'ravand' ); ?>
-                </p>
-                <?php
+            $appearanceSection["fields"]["color"]["id"],
+            $appearanceSection["fields"]["color"]["title"],
+            function () use ($optionName, $options){ 
+                $val = $options["color"];
+                echo '<input type="text" name="'.$optionName.'[color]" value="' . $val . '" class="color-picker" >';
             },
-            'ravand-appearance',
-            'ravand-title',
-            array(
-                'label_for'         => 'ravand-field-title',
-                // 'class'             => 'wporg_row',
-                // 'wporg_custom_data' => 'custom',
-            )
+            $pageSlug,
+            $appearanceSection["id"]
         );
 
-        wp_enqueue_style( 'wp-color-picker' ); 
+        
         require $this->plugin->resourcePath("views/admin/appearance.php");
+    }
+
+    private function enqueueColorPicker()
+    {
+        wp_enqueue_style( 'wp-color-picker' ); 
+        wp_enqueue_script( 'wp-color-picker');
     }
 }
