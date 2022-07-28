@@ -8,6 +8,8 @@ class AdminService
 {
     public $plugin;
 
+    public $mainPageSlug = "ravand";
+
     public function __construct(Plugin $plugin)
     {
         $this->plugin = $plugin;
@@ -15,33 +17,25 @@ class AdminService
 
     public function registerActions()
     {
-        add_action("admin_menu", function(){
+        add_action("admin_menu", function () {
             $this->addMenuPages();
         });
     }
 
     public function addMenuPages()
     {
-        $slug = "ravand";
-        $ravand_icon = 'data:image/svg+xml;base64,PHN2ZyBzdHlsZT0idHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTJweCkiIHZlcnNpb249IjEuMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIg0KICAgIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDcwNC4wMDAwMDAgNjk4LjAwMDAwMCINCiAgICBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCw2OTguMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIg0KICAgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIj48cGF0aCBkPSJNMzM3MyA2MzMwIGMtOTggLTI2IC0yMiAxNiAtODgzIC00ODIgLTE5NSAtMTEzIC01MTcgLTI5OSAtNzE1IC00MTMNCiAgIC0xOTggLTExNCAtNDA3IC0yMzUgLTQ2NSAtMjY5IC0xODMgLTEwNiAtMjgyIC0yMjUgLTMzNyAtNDAyIC0xNyAtNTYgLTE4DQogICAtMTI0IC0xOCAtMTI4NCAwIC0xMzcxIC01IC0xMjc2IDcyIC0xNDI0IDYwIC0xMTUgMTQ4IC0xOTMgMzQ0IC0zMDUgOTAgLTUyDQogICAzMzUgLTE5NCA1NDQgLTMxNCAxNDc0IC04NTIgMTM1OCAtNzg3IDE0NTIgLTgxMSAzNyAtMTAgMTAyIC0xNiAxNjQgLTE2IDEzOQ0KICAgMCAyMTQgMjcgNDM0IDE1NSAyNjUgMTUzIDEzNzcgNzk1IDE2MDAgOTIzIDExMCA2MyAyMjUgMTMyIDI1NiAxNTMgMTI1IDg0DQogICAyMjQgMjI5IDI1NCAzNzQgMjIgMTA0IDIyIDI0MTUgMCAyNTIwIC0yMiAxMDcgLTgzIDIyMCAtMTU4IDI5NiAtNjYgNjcgLTEwMw0KICAgOTAgLTU0NyAzNDYgLTEyNCA3MiAtNDcwIDI3MiAtNzcwIDQ0NSAtNzY1IDQ0MiAtNzU3IDQzOCAtODI4IDQ3MSAtMTI0IDU4DQogICAtMjY4IDcxIC0zOTkgMzd6IG00ODEgLTE2NzAgYzMzNSAtMTkgNDcyIC02NCA2MDUgLTE5OSA0MyAtNDQgOTAgLTEwNCAxMDgNCiAgIC0xMzggbDMzIC02MSAtNjggLTcwIGMtMTAzIC0xMDUgLTIyNSAtMTgxIC0zODIgLTIzNiAtODUgLTMwIC0yNDYgLTY3IC0yNTQNCiAgIC01OCAtMyAzIC02IDI2IC02IDUxIDAgNTYgLTM3IDEzOSAtNzQgMTY5IC02MyA0OSAtMTE0IDU3IC0zNzEgNTcgbC0yNDAgMCAtMw0KICAgLTE1MSAtMyAtMTUxIC03MSAtNyBjLTEwNCAtMTEgLTIzOSAtNDcgLTQ2MyAtMTI2IC0xMDkgLTM4IC0yMDEgLTY3IC0yMDQgLTY0DQogICAtMyAzIC02IDIyNiAtNiA0OTQgbDAgNDg5IDUwIDQgYzExNyA4IDExODUgNiAxMzQ5IC0zeiBtNzcyIC04MzQgYy0zOSAtMTc1DQogICAtMTUzIC0zMjggLTMxNiAtNDI1IC0yNCAtMTQgLTg3IC00MCAtMTM4IC01NyBsLTk0IC0zMSA2OCAtMzIgYzk5IC00NiAxMzYNCiAgIC03NCAyMDIgLTE1NSAxMDMgLTEyNSAxMTAgLTEzNyAzNDYgLTU5NyA3NSAtMTQ2IDEzNiAtMjcxIDEzNiAtMjc4IDAgLTggLTEwNw0KICAgLTExIC00MjAgLTkgbC00MjEgMyAtMTA1IDE5NSBjLTU4IDEwNyAtMTU1IDI4NyAtMjE2IDQwMCAtMTQ1IDI3MCAtMTc2IDMxMg0KICAgLTI0OCAzNTAgLTM3IDE5IC0xMzMgNDAgLTE4MiA0MCBsLTI4IDAgLTIgLTQ5MiAtMyAtNDkzIC0zNzUgMCAtMzc1IDAgLTMgNTg3DQogICAtMiA1ODggNjIgMzIgYzE4NiA5NiAzMzEgMTUwIDUxNyAxOTUgMTAyIDI1IDEyMyAyNiA1MzEgMzMgNDYxIDggNDc2IDEwIDY3NQ0KICAgNzMgNTUgMTcgMTY4IDY1IDI1MCAxMDcgMTcxIDg2IDE2OCA4NyAxNDEgLTM0eiIvPjwvZz48L3N2Zz4=';
+        $ravandIcon = 'data:image/svg+xml;base64,PHN2ZyBzdHlsZT0idHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTJweCkiIHZlcnNpb249IjEuMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIg0KICAgIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDcwNC4wMDAwMDAgNjk4LjAwMDAwMCINCiAgICBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCw2OTguMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIg0KICAgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIj48cGF0aCBkPSJNMzM3MyA2MzMwIGMtOTggLTI2IC0yMiAxNiAtODgzIC00ODIgLTE5NSAtMTEzIC01MTcgLTI5OSAtNzE1IC00MTMNCiAgIC0xOTggLTExNCAtNDA3IC0yMzUgLTQ2NSAtMjY5IC0xODMgLTEwNiAtMjgyIC0yMjUgLTMzNyAtNDAyIC0xNyAtNTYgLTE4DQogICAtMTI0IC0xOCAtMTI4NCAwIC0xMzcxIC01IC0xMjc2IDcyIC0xNDI0IDYwIC0xMTUgMTQ4IC0xOTMgMzQ0IC0zMDUgOTAgLTUyDQogICAzMzUgLTE5NCA1NDQgLTMxNCAxNDc0IC04NTIgMTM1OCAtNzg3IDE0NTIgLTgxMSAzNyAtMTAgMTAyIC0xNiAxNjQgLTE2IDEzOQ0KICAgMCAyMTQgMjcgNDM0IDE1NSAyNjUgMTUzIDEzNzcgNzk1IDE2MDAgOTIzIDExMCA2MyAyMjUgMTMyIDI1NiAxNTMgMTI1IDg0DQogICAyMjQgMjI5IDI1NCAzNzQgMjIgMTA0IDIyIDI0MTUgMCAyNTIwIC0yMiAxMDcgLTgzIDIyMCAtMTU4IDI5NiAtNjYgNjcgLTEwMw0KICAgOTAgLTU0NyAzNDYgLTEyNCA3MiAtNDcwIDI3MiAtNzcwIDQ0NSAtNzY1IDQ0MiAtNzU3IDQzOCAtODI4IDQ3MSAtMTI0IDU4DQogICAtMjY4IDcxIC0zOTkgMzd6IG00ODEgLTE2NzAgYzMzNSAtMTkgNDcyIC02NCA2MDUgLTE5OSA0MyAtNDQgOTAgLTEwNCAxMDgNCiAgIC0xMzggbDMzIC02MSAtNjggLTcwIGMtMTAzIC0xMDUgLTIyNSAtMTgxIC0zODIgLTIzNiAtODUgLTMwIC0yNDYgLTY3IC0yNTQNCiAgIC01OCAtMyAzIC02IDI2IC02IDUxIDAgNTYgLTM3IDEzOSAtNzQgMTY5IC02MyA0OSAtMTE0IDU3IC0zNzEgNTcgbC0yNDAgMCAtMw0KICAgLTE1MSAtMyAtMTUxIC03MSAtNyBjLTEwNCAtMTEgLTIzOSAtNDcgLTQ2MyAtMTI2IC0xMDkgLTM4IC0yMDEgLTY3IC0yMDQgLTY0DQogICAtMyAzIC02IDIyNiAtNiA0OTQgbDAgNDg5IDUwIDQgYzExNyA4IDExODUgNiAxMzQ5IC0zeiBtNzcyIC04MzQgYy0zOSAtMTc1DQogICAtMTUzIC0zMjggLTMxNiAtNDI1IC0yNCAtMTQgLTg3IC00MCAtMTM4IC01NyBsLTk0IC0zMSA2OCAtMzIgYzk5IC00NiAxMzYNCiAgIC03NCAyMDIgLTE1NSAxMDMgLTEyNSAxMTAgLTEzNyAzNDYgLTU5NyA3NSAtMTQ2IDEzNiAtMjcxIDEzNiAtMjc4IDAgLTggLTEwNw0KICAgLTExIC00MjAgLTkgbC00MjEgMyAtMTA1IDE5NSBjLTU4IDEwNyAtMTU1IDI4NyAtMjE2IDQwMCAtMTQ1IDI3MCAtMTc2IDMxMg0KICAgLTI0OCAzNTAgLTM3IDE5IC0xMzMgNDAgLTE4MiA0MCBsLTI4IDAgLTIgLTQ5MiAtMyAtNDkzIC0zNzUgMCAtMzc1IDAgLTMgNTg3DQogICAtMiA1ODggNjIgMzIgYzE4NiA5NiAzMzEgMTUwIDUxNyAxOTUgMTAyIDI1IDEyMyAyNiA1MzEgMzMgNDYxIDggNDc2IDEwIDY3NQ0KICAgNzMgNTUgMTcgMTY4IDY1IDI1MCAxMDcgMTcxIDg2IDE2OCA4NyAxNDEgLTM0eiIvPjwvZz48L3N2Zz4=';
         add_menu_page(
-            __("Ravand Admin Panel","ravand"),
-            __("Ravand","ravand"),
+            __("Ravand Admin Panel", "ravand"),
+            __("Ravand", "ravand"),
             'manage_options',
-            $slug,
+            $this->mainPageSlug,
             [$this, "renderMainAdminMenuPage"],
-            $ravand_icon,
+            $ravandIcon,
             // int $position = null
         );
 
-        add_submenu_page(
-            $slug,
-            __("Ravand Appearance Settings","ravand"),
-            __("Appearance", "ravand"),
-            'manage_options',
-            'ravand-appearance',
-            [$this,"renderAppearanceSettings"]
-        );
+        $this->addAppearanceSettingsPage();
     }
 
     public function renderMainAdminMenuPage()
@@ -49,56 +43,91 @@ class AdminService
         ?> Boo! <?php
     }
 
-    public function renderAppearanceSettings()
+    public function addAppearanceSettingsPage()
     {
-        $pageSlug = "ravand-appearance";
         $optionName = 'ravand-appearance-settings';
-        $logoTitle = "";
-        $options = get_option($optionName, ["color" => "#ffffff"]);
+        $appearanceSettings = [
+            "page" => "ravand-appearance",
+            "optionName" =>  $optionName,
 
-        $appearanceSection = [
-            "id" => "ravand-appearance-section",
-            "title" => "Appearance Section",
-            "fields" => [
-                "color" => [
-                    "id" => 'ravand-appearance-color',
-                    "title" => "Color"
+            "options" => get_option($optionName, [
+                "colors" => [
+                    "sidebar" => "#ffffff"
+                ]
+            ]),
+            
+            "sections" => [
+                "colors" => [
+                    "id" => "ravand-color-section",
+                    "title" => "Colors",
+                    "fields" => [
+                        "sidebar" => [
+                            "id" => 'ravand-sidebar-color',
+                            "title" => "Sidebar Color"
+                        ]
+                    ]
                 ]
             ]
         ];
 
         $this->enqueueColorPicker();
 
-        register_setting( 
-            $pageSlug, 
-            $optionName 
+        register_setting(
+            $appearanceSettings["page"],
+            $appearanceSettings["optionName"]
         );
 
         add_settings_section(
-            $appearanceSection["id"],
-            $appearanceSection["title"], 
-            function ( $args ) { },
-            $pageSlug
-        );
-
-        add_settings_field(
-            $appearanceSection["fields"]["color"]["id"],
-            $appearanceSection["fields"]["color"]["title"],
-            function () use ($optionName, $options){ 
-                $val = $options["color"];
-                echo '<input type="text" name="'.$optionName.'[color]" value="' . $val . '" class="color-picker" >';
+            $appearanceSettings["sections"]["colors"]["id"],
+            $appearanceSettings["sections"]["colors"]["title"],
+            function ($args) {
             },
-            $pageSlug,
-            $appearanceSection["id"]
+            $appearanceSettings["page"]
         );
 
-        
-        require $this->plugin->resourcePath("views/admin/appearance.php");
+        $this->addAppearanceSettingsColorField("sidebar", $appearanceSettings);
+
+        // add_settings_field(
+        //     $appearanceSettings["sections"]["colors"]["fields"]["sidebar"]["id"],
+        //     $appearanceSettings["sections"]["colors"]["fields"]["sidebar"]["title"],
+        //     function () use ($appearanceSettings) {
+        //         $val = $appearanceSettings["options"]["colors"]["sidebar"];
+        //         echo '<input type="text" name="'.$appearanceSettings["optionName"].'[colors][sidebar]" value="' . $val . '" class="color-picker" >';
+        //     },
+        //     $appearanceSettings["page"],
+        //     $appearanceSettings["sections"]["colors"]["id"]
+        // );
+
+        add_submenu_page(
+            $this->mainPageSlug,
+            __("Ravand Appearance Settings", "ravand"),
+            __("Appearance", "ravand"),
+            'manage_options',
+            'ravand-appearance',
+            function () use ($appearanceSettings) {
+                require $this->plugin->resourcePath("views/admin/appearance.php");
+            }
+        );
+    }
+
+    private function addAppearanceSettingsColorField($field, $appearanceSettings)
+    {
+        $section = "colors";
+        add_settings_field(
+            $appearanceSettings["sections"][$section]["fields"][$field]["id"],
+            $appearanceSettings["sections"][$section]["fields"][$field]["title"],
+            function () use ($appearanceSettings, $section, $field) {
+                $val = $appearanceSettings["options"][$section][$field];
+                echo '<input type="text" name="'.$appearanceSettings["optionName"].'['.$section.']['.$field.']" value="' . $val . '" class="color-picker" >';
+            },
+            $appearanceSettings["page"],
+            $appearanceSettings["sections"][$section]["id"]
+        );
     }
 
     private function enqueueColorPicker()
     {
-        wp_enqueue_style( 'wp-color-picker' ); 
-        wp_enqueue_script( 'wp-color-picker');
+        wp_enqueue_style('wp-color-picker');
+        wp_enqueue_script('wp-color-picker');
     }
 }

@@ -2,20 +2,48 @@
 
 namespace Ravand\Foundation\Settings;
 
-class Setting
+abstract class Setting
 {
-    protected $pageSlug;
+    protected $page;
 
-    public function __construct($pageSlug, $optionsName)
+    protected $options;
+
+    protected $sections;
+
+    /**
+     * Set settings page slug and option name
+     * 
+     * @param mixed $page
+     * @param mixed $options
+     */
+    public function __construct($page, $options)
     {
-        $this->pageSlug = $pageSlug;
-        $this->optionsName = $optionsName;
+        $this->page = $page;
+        $this->options = $options;
 
-        register_settings($pageSlug, $optionsName);
+        $this->register();
+    }
+
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    public function getOptionsName()
+    {
+        return $this->options;
+    }
+
+    public function register()
+    {
+        register_settings(
+            $this->getPage(), 
+            $this->getOptionsName()
+        );
     }
 
     public function addSection(Section $section)
     {
-
+        $section->register($this);
     }
 }
