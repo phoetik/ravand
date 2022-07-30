@@ -1,11 +1,13 @@
 <?php
 
+namespace Ravand\Settings;
+
 use Ravand\Foundation\Settings\Setting;
 
 class Appearance extends Setting
 {
     public $sections = [
-        Sections\Color::class
+        Sections\AppearanceColorSection::class
     ];
     
     public function sanitize()
@@ -13,12 +15,8 @@ class Appearance extends Setting
         //
     }
 
-    public function default()
+    public function getSubmitButtonText()
     {
-        return [
-            "colors" => [
-                "sidebar" => "#fcba03"
-            ]
-        ];
+        return "Sub Mit";
     }
 }

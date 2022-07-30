@@ -4,23 +4,63 @@ namespace Ravand\Foundation\Settings;
 
 abstract class Section
 {
-    public function register(Setting $setting)
+    protected $setting;
+
+    protected $fields = [];
+
+    protected $registeredFields = [];
+
+    public function __construct(Setting $setting)
+    {
+        $this->setting = $setting;
+        $this->initializeFields();
+    }
+
+    private function initializeFields()
+    {
+        $fieldClasses = $this->fields;
+        $fields = [];
+
+        foreach ($fieldClasses as $fieldClass) {
+            $fields[$fieldClass] = new $fieldClass($this, $this->setting);
+        }
+
+        $this->fields = $fields;
+    }
+
+    public function getSetting()
+    {
+        return $this->setting;
+    }
+
+    public function register()
     {
         add_settings_section(
-            self::class,
-            $this->getTitle(),
+            static::class,
+            $this->title(),
             [$this, "render"],
-            $setting->getPage()
+            $this->setting->page()
         );
+
+        $this->registerFields();
+    }
+
+    public function registerFields()
+    {
+        foreach($this->fields as $fieldClass => $field)
+        {
+            $field->register();
+
+            $this->registeredFields[] = $fieldClass;
+        }
     }
 
     // public function addField()
 
     abstract public function render();
 
-    abstract public function getTitle();
+    public function title()
+    {
+        return "";
+    }
 }
-
-(new Ravand\Settings\AppearanceSettings("wporg", "wporg_options"))->register([
-
-]);

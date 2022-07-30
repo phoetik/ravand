@@ -40,63 +40,28 @@ class AdminService
 
     public function renderMainAdminMenuPage()
     {
-        ?> Boo! <?php
+        echo "<pre><code>";
+        $args = array(
+            'public'   => true,
+            '_builtin' => false,
+         );
+     
+         $output = 'names'; // names or objects, note names is the default
+         $operator = 'and'; // 'and' or 'or'
+     
+         $post_types = get_post_types( $args, $output, $operator ); 
+     
+         var_dump($post_types);
+        echo "</code></pre>";
     }
 
     public function addAppearanceSettingsPage()
     {
-        $optionName = 'ravand-appearance-settings';
-        $appearanceSettings = [
-            "page" => "ravand-appearance",
-            "optionName" =>  $optionName,
-
-            "options" => get_option($optionName, [
-                "colors" => [
-                    "sidebar" => "#ffffff"
-                ]
-            ]),
-            
-            "sections" => [
-                "colors" => [
-                    "id" => "ravand-color-section",
-                    "title" => "Colors",
-                    "fields" => [
-                        "sidebar" => [
-                            "id" => 'ravand-sidebar-color',
-                            "title" => "Sidebar Color"
-                        ]
-                    ]
-                ]
-            ]
-        ];
-
         $this->enqueueColorPicker();
 
-        register_setting(
-            $appearanceSettings["page"],
-            $appearanceSettings["optionName"]
-        );
+        $appearanceSettings = new \Ravand\Settings\Appearance("ravand-appearance","ravand-appearance");
 
-        add_settings_section(
-            $appearanceSettings["sections"]["colors"]["id"],
-            $appearanceSettings["sections"]["colors"]["title"],
-            function ($args) {
-            },
-            $appearanceSettings["page"]
-        );
-
-        $this->addAppearanceSettingsColorField("sidebar", $appearanceSettings);
-
-        // add_settings_field(
-        //     $appearanceSettings["sections"]["colors"]["fields"]["sidebar"]["id"],
-        //     $appearanceSettings["sections"]["colors"]["fields"]["sidebar"]["title"],
-        //     function () use ($appearanceSettings) {
-        //         $val = $appearanceSettings["options"]["colors"]["sidebar"];
-        //         echo '<input type="text" name="'.$appearanceSettings["optionName"].'[colors][sidebar]" value="' . $val . '" class="color-picker" >';
-        //     },
-        //     $appearanceSettings["page"],
-        //     $appearanceSettings["sections"]["colors"]["id"]
-        // );
+        $appearanceSettings->registerSections();
 
         add_submenu_page(
             $this->mainPageSlug,
@@ -107,21 +72,6 @@ class AdminService
             function () use ($appearanceSettings) {
                 require $this->plugin->resourcePath("views/admin/appearance.php");
             }
-        );
-    }
-
-    private function addAppearanceSettingsColorField($field, $appearanceSettings)
-    {
-        $section = "colors";
-        add_settings_field(
-            $appearanceSettings["sections"][$section]["fields"][$field]["id"],
-            $appearanceSettings["sections"][$section]["fields"][$field]["title"],
-            function () use ($appearanceSettings, $section, $field) {
-                $val = $appearanceSettings["options"][$section][$field];
-                echo '<input type="text" name="'.$appearanceSettings["optionName"].'['.$section.']['.$field.']" value="' . $val . '" class="color-picker" >';
-            },
-            $appearanceSettings["page"],
-            $appearanceSettings["sections"][$section]["id"]
         );
     }
 
