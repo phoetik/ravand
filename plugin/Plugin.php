@@ -11,15 +11,12 @@ class Plugin extends BasePlugin
     public function init()
     {
         add_filter('theme_page_templates', function ($templates) {
-            $templates[
-               $this->panelTemplatePath()
-            ] = "Ravand Admin Template";
-
-            // var_dump($templates);
+            $templates[ $this->panelTemplatePath() ] = "Ravand Admin Template";
         
             return $templates;
         });
 
+        wp_enqueue_script("jquery-ui-sortable");
 
         add_filter( 'template_include', function ($template) {
             if (is_page()) {

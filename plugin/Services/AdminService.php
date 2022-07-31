@@ -40,19 +40,14 @@ class AdminService
 
     public function renderMainAdminMenuPage()
     {
-        echo "<pre><code>";
-        $args = array(
-            'public'   => true,
-            '_builtin' => false,
-         );
-     
-         $output = 'names'; // names or objects, note names is the default
-         $operator = 'and'; // 'and' or 'or'
-     
-         $post_types = get_post_types( $args, $output, $operator ); 
-     
-         var_dump($post_types);
-        echo "</code></pre>";
+        $table = new \Ravand\Tables\PanelTable();
+        // Prepare table
+        $table->prepare_items();
+
+        echo '<div class="wrap"><h2>Employees List Table</h2>';
+        // Display table
+        $table->display();
+        echo '</div>';
     }
 
     public function addAppearanceSettingsPage()
